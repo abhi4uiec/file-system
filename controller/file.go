@@ -41,6 +41,11 @@ func FetchFilesBasedOnCriteria(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
+	if len(positionMap) == 0 {
+		json.NewEncoder(w).Encode("No available matched files to download")
+		return
+	}
+
 	var filesToDownload []string
 	// sort the map based on key, this will give us the character at the earliest position
 	if len(positionMap) > 1 {
@@ -71,7 +76,7 @@ func FetchFilesBasedOnCriteria(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 
-	// encoding our podDetails array into a JSON string and then writing as part of our response.
+	// encoding name of downloaded files array into a JSON string and then writing as part of our response.
 	json.NewEncoder(w).Encode(filesToDownload)
 
 	positionMap = map[int]string{}
