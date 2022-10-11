@@ -63,6 +63,7 @@ func FetchFilesBasedOnCriteria(w http.ResponseWriter, r *http.Request) {
 		filesToDownload[i] = remoteFileServerURL + constants.FORWARD_SLASH + filesToDownload[i]
 	}
 
+	// actually download the matched files
 	err = readAndDownloadMultipleFiles(filesToDownload, "downloadFile")
 	if err != nil {
 		log.Fatal(err)
