@@ -56,3 +56,9 @@ then 'file2' and 'file4' should be downloaded
     }
 
 Note: The program is reading and downloading files concurrently and can download multiple GB's of file.
+
+Improvements:
+1) Populate map only if you find a file with character at smaller position.
+2) Dont read the other entire file, if you have already found a file previously having character at earlier position.
+3) If a character is found in 3rd chunk for ex, then need to adjust logic to correctly calculate index of character.
+4) Make use of tmp file to store the read data, this will decrease the bandwidth used.
